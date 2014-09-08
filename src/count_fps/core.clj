@@ -24,3 +24,21 @@
     (set/difference
      (into #{} (map #(ec/augment-error-code ground-truth (read-ocr-postcorrected) %) (read-corrected-ocr-edits)))
      (into #{} (map #(ec/augment-error-code ground-truth (read-ocr-text) %) (read-ocr-edits))))))
+
+(defn visualize-word [ edit-code]
+                                        ; code bsp. [1 1] die Zeichentypen
+                                        ; f - from     ;  t - to   ; bsp. "e"  "c"
+                                        ; [a b]  ; bsp. [1422 1426]
+  (let [[[code [a b :as position] & rest] [f t]] edit-code
+        ground-truth (read-ground-truth)]
+
+    (.substring ground-truth (- a 10) (+ a 10))))
+
+(defn find-left [text ind]
+                                        ;  loop or recur ...
+                                        ; testen mit (nth ...)
+
+  )
+
+(defn visualize-words []
+  (map #(visualize-word %) (visualize-comparison) ))
